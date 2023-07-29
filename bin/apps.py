@@ -26,7 +26,7 @@ def centerWindow(window):
 def installApk(installApk):
     apk = Tk()
     apk.withdraw()
-    apkPath = filedialog.askopenfilename(title="选择一个 apk 文件", filetypes=(("APK Files", "*.apk"),))
+    apkPath = filedialog.askopenfilename(title="选择一个 apk 文件", filetypes=(("APK File", "*.apk"),))
     os.chdir("bin\\scrcpy")
     os.system("adb install " + apkPath)
     os.chdir(originalDir)
