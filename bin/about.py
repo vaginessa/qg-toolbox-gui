@@ -43,7 +43,6 @@ openQQ.grid(row=1, column=0, padx=10, pady=10, sticky="nesw")
 
 
 openSource = ttk.Label(root, text="开源相关", foreground="#0078d4", cursor="hand2")
-# openSource.pack()
 openSource.bind("<Button-1>", lambda e: openOpenSource())
 openSource.grid(row=2, column=0, padx=10, pady=10, sticky="nesw")
 
