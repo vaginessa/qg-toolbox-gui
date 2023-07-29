@@ -1,5 +1,7 @@
 import tkinter as tk
 import darkdetect
+import os
+import webbrowser
 from tkinter import *
 from tkinter import ttk
 
@@ -16,6 +18,34 @@ def centerWindow(window):
 root = Tk()
 root.title("关于")
 root.geometry("200x150")
+
+
+def openOpenSource():
+    os.startfile("bin\\open source.html")
+
+
+def openQq(openQq):
+    webbrowser.open_new("https://qm.qq.com/q/oLoAhqhnQm&personal_qrcode_source=4")
+
+
+def startGithub(startGithub):
+    webbrowser.open_new("https://github.com/qgmzmy/qg-toolbox-gui")
+
+
+openGithub = ttk.Button(root, text="GitHub")
+openGithub.bind("<Button-1>", startGithub)
+openGithub.grid(row=0, column=0, padx=10, pady=10, sticky="nesw")
+
+
+openQQ = ttk.Button(root, text="联系作者（QQ）")
+openQQ.bind("<Button-1>", openQq)
+openQQ.grid(row=1, column=0, padx=10, pady=10, sticky="nesw")
+
+
+openSource = ttk.Label(root, text="开源相关", foreground="#0078d4", cursor="hand2")
+# openSource.pack()
+openSource.bind("<Button-1>", lambda e: openOpenSource())
+openSource.grid(row=2, column=0, padx=10, pady=10, sticky="nesw")
 
 
 theme = ["light","dark"]
