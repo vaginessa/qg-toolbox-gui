@@ -105,4 +105,5 @@ else:
 
 
 centerWindow(root)
+root.resizable(False, False)
 root.mainloop()
