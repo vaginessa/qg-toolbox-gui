@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import os
 import threading
-import subprocess
 import darkdetect
 
 originalDir = os.getcwd()
