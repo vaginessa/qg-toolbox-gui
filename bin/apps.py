@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import os
 import threading
+import subprocess
 import darkdetect
 
 originalDir = os.getcwd()
@@ -16,11 +17,12 @@ def centerWindow(window):
 
 def installApk(event):
     apkPath = filedialog.askopenfilename(title="选择一个 apk 文件", filetypes=(("APK 文件", "*.apk"), ))
-    os.chdir("bin\\scrcpy")
+    os.chdir(originalDir + "\\bin\\scrcpy")
 
     installing = tk.Toplevel()
     installing.title("安装应用")
     installing.geometry("250x100")
+    centerWindow(installing)
 
     installProgressbar = ttk.Progressbar(installing, length=200, mode="indeterminate")
     installProgressbar.pack(pady=20)
@@ -37,8 +39,8 @@ def installApk(event):
         installing.destroy()
         if "Success" in installOutput:
             messagebox.showinfo("安装应用", "安装成功")
-        # else:
-            
+        else:
+            messagebox.showerror("安装应用", "安装失败")
         installButton.config(state="normal")  # 启用安装按钮
 
     t = threading.Thread(target=installApkThread)
