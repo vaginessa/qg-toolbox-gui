@@ -43,7 +43,37 @@ def installApk(event):
         installButton.config(state="normal")  # 启用安装按钮
 
     t = threading.Thread(target=installApkThread)
+    os.chdir(originalDir)
     t.start()
+
+
+def uninstallApp(event):
+    inputPackage = tk.Toplevel()
+    inputPackage.title("卸载应用")
+    inputPackage.geometry("250x100")
+
+    thisPackage = os.popen("adb shell dumpsys window | findstr mCurrentFocus")
+    print(type(thisPackage))
+    thisPackage = thisPackage.read()
+    print(thisPackage)
+
+    package = ttk.Frame(inputPackage)
+    Entry = ttk.Entry(package, width=33)
+    package.grid()
+    Entry.grid()
+    inputPackage.mainloop()
+
+    centerWindow(inputPackage)
+
+    uninstalling = tk.Toplevel()
+    uninstalling.title("卸载应用")
+    uninstalling.geometry("250x100")
+    centerWindow(uninstalling)
+
+    # uninstallProgressbar = ttk.Progressbar(uninstalling, length=200, mode="indeterminate")
+    uninstallButton.config(state="disabled")  # 禁用安装按钮
+
+
 root = tk.Tk()
 root.title("应用管理")
 root.geometry("500x260")
@@ -51,6 +81,10 @@ root.geometry("500x260")
 installButton =ttk.Button(root, text="安装应用")
 installButton.bind("<Button-1>", installApk)
 installButton.grid(row=0, column=0, padx=10, pady=10, sticky="nesw")
+
+uninstallButton = ttk.Button(root, text="卸载应用")
+uninstallButton.bind("<Button-1>", uninstallApp)
+uninstallButton.grid(row=1, column=0, padx=10, pady=10, sticky="nesw")
 
 theme = ["light", "dark"]
 root.tk.call("source", "sv.tcl")
