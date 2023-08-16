@@ -26,7 +26,7 @@ def startShell(shell):
 
 
 def apps(apps):
-    os.startfile("bin\\apps.exe")
+    os.startfile("bin\\apps.pyw")
 
 
 def goRoot(root):

@@ -1,8 +1,10 @@
 import tkinter as tk
+from tkinter import *
 from tkinter import ttk, filedialog, messagebox
 import os
 import threading
 import darkdetect
+import re
 
 originalDir = os.getcwd()
 
@@ -56,9 +58,17 @@ def uninstallApp(event):
     print(type(thisPackage))
     thisPackage = thisPackage.read()
     print(thisPackage)
+    pattern = r"([a-zA-Z0-9_\.]+)\/"
+    match_obj = re.search(pattern, thisPackage)
+
+    if match_obj:
+        packageName = match_obj.group(1)
+        print(packageName)
 
     package = ttk.Frame(inputPackage)
-    Entry = ttk.Entry(package, width=33)
+    packageStr = StringVar()
+    packageStr.set(packageName)
+    Entry = ttk.Entry(package, width=33, textvariable=packageStr)
     package.grid()
     Entry.grid()
     inputPackage.mainloop()
@@ -71,7 +81,7 @@ def uninstallApp(event):
     centerWindow(uninstalling)
 
     # uninstallProgressbar = ttk.Progressbar(uninstalling, length=200, mode="indeterminate")
-    uninstallButton.config(state="disabled")  # 禁用安装按钮
+    uninstallButton.config(state="disabled")  # 禁用卸载按钮
 
 
 root = tk.Tk()
