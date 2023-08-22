@@ -65,12 +65,13 @@ def uninstallApp(event):
         packageName = match_obj.group(1)
         print(packageName)
 
-    package = ttk.Frame(inputPackage)
-    packageStr = StringVar()
-    packageStr.set(packageName)
-    Entry = ttk.Entry(package, width=33, textvariable=packageStr)
-    package.grid()
-    Entry.grid()
+        package = ttk.Frame(inputPackage)
+        packageStr = StringVar()
+        packageStr.set(packageName)
+        Entry = ttk.Entry(package, width=33, textvariable=packageStr)
+        package.grid()
+        Entry.grid()
+
     inputPackage.mainloop()
 
     centerWindow(inputPackage)

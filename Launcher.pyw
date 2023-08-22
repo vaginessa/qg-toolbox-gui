@@ -106,4 +106,5 @@ else:
 
 centerWindow(root)
 root.resizable(False, False)
+os.system("adb devices")
 root.mainloop()
