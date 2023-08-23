@@ -61,7 +61,7 @@ def uninstallApp(event):
     pattern = r"([a-zA-Z0-9_\.]+)\/"
     match_obj = re.search(pattern, thisPackage)
 
-    if match_obj:
+    if match_obj is not None:
         packageName = match_obj.group(1)
         print(packageName)
 
@@ -71,6 +71,16 @@ def uninstallApp(event):
         Entry = ttk.Entry(package, width=33, textvariable=packageStr)
         package.grid()
         Entry.grid()
+
+    else:
+        package = ttk.Frame(inputPackage)
+        packageStr = StringVar()
+        Entry = ttk.Entry(package, width=33, textvariable=packageStr)
+        package.grid()
+        Entry.grid()
+        print(packageStr.get())
+
+    getPackage = ttk.Button(inputPackage)        
 
     inputPackage.mainloop()
 

@@ -44,6 +44,10 @@ def scrcpy(scrcpy):
 def about(about):
     os.startfile("bin\\about.exe")
 
+
+def aboutPhone(aboutPhone):
+    os.startfile("bin\\aboutPhone.pyw")
+
     
 def centerWindow(window):
     window.update_idletasks()
@@ -90,10 +94,16 @@ buttonScrcpy.bind("<Button-1>", scrcpy)
 buttonScrcpy.grid(row=0, column=1, padx=10, pady=10, sticky="nesw")
 
 
+buttonAboutPhone = ttk.Button(root)
+buttonAboutPhone["text"] = "设备信息"
+buttonAboutPhone.bind("<Button-1>", aboutPhone)
+buttonAboutPhone.grid(row=1, column=1, padx=10, pady=10, sticky="nesw")
+
+
 buttonAbout = ttk.Button(root)
 buttonAbout["text"] = "关于"
 buttonAbout.bind("<Button-1>", about)
-buttonAbout.grid(row=1, column=1, padx=10, pady=10, sticky="nesw")
+buttonAbout.grid(row=2, column=1, padx=10, pady=10, sticky="nesw")
 
 
 theme = ["light","dark"]
