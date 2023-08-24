@@ -50,6 +50,14 @@ def installApk(event):
 
 
 def uninstallApp(event):
+
+
+    def uninstall():
+        packageName = packageStr.get()
+        uninstalled = os.popen("adb uninstall " + packageName)
+        uninstalled = uninstalled.read()
+
+
     inputPackage = tk.Toplevel()
     inputPackage.title("卸载应用")
     inputPackage.geometry("250x100")
@@ -68,19 +76,21 @@ def uninstallApp(event):
         package = ttk.Frame(inputPackage)
         packageStr = StringVar()
         packageStr.set(packageName)
-        Entry = ttk.Entry(package, width=33, textvariable=packageStr)
+        Entry = ttk.Entry(package, width=23, textvariable=packageStr)
         package.grid()
-        Entry.grid()
+        Entry.grid(row=0, column=0, padx=10, pady=10, sticky="nesw")
 
     else:
         package = ttk.Frame(inputPackage)
         packageStr = StringVar()
-        Entry = ttk.Entry(package, width=33, textvariable=packageStr)
+        Entry = ttk.Entry(package, width=23, textvariable=packageStr)
         package.grid()
-        Entry.grid()
+        Entry.grid(row=0, column=0, padx=10, pady=10, sticky="nesw")
         print(packageStr.get())
 
-    getPackage = ttk.Button(inputPackage)        
+    getPackage = ttk.Button(inputPackage, text="→")
+    getPackage.bind("<Button-1>", uninstall)
+    getPackage.grid(row=0, column=1, padx=0, pady=10, sticky="nesw")
 
     inputPackage.mainloop()
 
