@@ -10,7 +10,7 @@ originalDir = os.getcwd()
 
 root = Tk()
 root.title("QG Toolbox")
-root.geometry("500x260")
+root.geometry("500x290")
 
 
 def startCmd(cmd):
@@ -43,10 +43,6 @@ def scrcpy(scrcpy):
 
 def about(about):
     os.startfile("bin\\about.exe")
-
-
-def aboutPhone(aboutPhone):
-    os.startfile("bin\\aboutPhone.pyw")
 
     
 def centerWindow(window):
@@ -94,16 +90,38 @@ buttonScrcpy.bind("<Button-1>", scrcpy)
 buttonScrcpy.grid(row=0, column=1, padx=10, pady=10, sticky="nesw")
 
 
-buttonAboutPhone = ttk.Button(root)
-buttonAboutPhone["text"] = "设备信息"
-buttonAboutPhone.bind("<Button-1>", aboutPhone)
-buttonAboutPhone.grid(row=1, column=1, padx=10, pady=10, sticky="nesw")
-
-
 buttonAbout = ttk.Button(root)
 buttonAbout["text"] = "关于"
 buttonAbout.bind("<Button-1>", about)
-buttonAbout.grid(row=2, column=1, padx=10, pady=10, sticky="nesw")
+buttonAbout.grid(row=1, column=1, padx=10, pady=10, sticky="nesw")
+
+
+aboutTitle = tk.Label(root, text="关于设备")
+aboutTitle.grid(row=0, column=2, padx=100, pady=10,sticky="nesw")
+
+
+deviceBrand = os.popen("adb shell getprop ro.product.brand")
+deviceBrand = deviceBrand.read()
+brand = tk.Label(root, text="厂商：" + deviceBrand)
+brand.grid(row=1, column=2, padx=100, pady=10,sticky="nesw")
+
+
+deviceModel = os.popen("adb shell getprop ro.product.model")
+deviceModel = deviceModel.read()
+model = tk.Label(root, text="型号：" + deviceModel)
+model.grid(row=2, column=2, padx=100, pady=10, sticky="nesw")
+
+
+AndroidVersion = os.popen("adb shell getprop ro.build.version.release")
+AndroidVersion = AndroidVersion.read()
+Android = tk.Label(root, text="Android：" + AndroidVersion)
+Android.grid(row=3, column=2, padx=100, pady=10, sticky="nesw")
+
+
+deviceSoc = os.popen("adb shell getprop ro.soc.model")
+deviceSoc = deviceSoc.read()
+soc = tk.Label(root, text="Soc：" + deviceSoc)
+soc.grid(row=4, column=2, padx=100, pady=10, sticky="nesw")
 
 
 theme = ["light","dark"]

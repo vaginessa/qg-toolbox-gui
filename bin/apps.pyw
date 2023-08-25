@@ -52,10 +52,15 @@ def installApk(event):
 def uninstallApp(event):
 
 
-    def uninstall():
+    def uninstall(uninstall):
         packageName = packageStr.get()
         uninstalled = os.popen("adb uninstall " + packageName)
         uninstalled = uninstalled.read()
+        print(uninstalled)
+        if "Success" in uninstalled:
+            messagebox.showinfo("卸载应用", "卸载成功")
+        else:
+            messagebox.showerror("卸载应用", "卸载失败")
 
 
     inputPackage = tk.Toplevel()
