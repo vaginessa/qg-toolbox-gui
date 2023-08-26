@@ -56,16 +56,13 @@ def uninstallApp(event):
         packageName = packageStr.get()
         uninstalled = os.popen("adb uninstall " + packageName)
         uninstalled = uninstalled.read()
-        print(uninstalled)
         if "Success" in uninstalled:
             messagebox.showinfo("卸载应用", "卸载成功")
         else:
             messagebox.showerror("卸载应用", "卸载失败")
         uninstallButton.config(state=tk.NORMAL)
 
-
     uninstallButton.config(state=tk.DISABLED)  # 禁用卸载按钮
-
 
     inputPackage = tk.Toplevel()
     inputPackage.title("卸载应用")
