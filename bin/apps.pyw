@@ -52,10 +52,19 @@ def installApk(event):
 def uninstallApp(event):
 
 
-    def uninstall():
+    def uninstall(uninstall):
         packageName = packageStr.get()
         uninstalled = os.popen("adb uninstall " + packageName)
         uninstalled = uninstalled.read()
+        print(uninstalled)
+        if "Success" in uninstalled:
+            messagebox.showinfo("卸载应用", "卸载成功")
+        else:
+            messagebox.showerror("卸载应用", "卸载失败")
+        uninstallButton.config(state=tk.NORMAL)
+
+
+    uninstallButton.config(state=tk.DISABLED)  # 禁用卸载按钮
 
 
     inputPackage = tk.Toplevel()
@@ -101,21 +110,26 @@ def uninstallApp(event):
     uninstalling.geometry("250x100")
     centerWindow(uninstalling)
 
-    # uninstallProgressbar = ttk.Progressbar(uninstalling, length=200, mode="indeterminate")
-    uninstallButton.config(state="disabled")  # 禁用卸载按钮
-
 
 root = tk.Tk()
 root.title("应用管理")
-root.geometry("500x260")
+root.geometry("500x290")
+
 
 installButton =ttk.Button(root, text="安装应用")
 installButton.bind("<Button-1>", installApk)
 installButton.grid(row=0, column=0, padx=10, pady=10, sticky="nesw")
 
+
 uninstallButton = ttk.Button(root, text="卸载应用")
 uninstallButton.bind("<Button-1>", uninstallApp)
 uninstallButton.grid(row=1, column=0, padx=10, pady=10, sticky="nesw")
+
+
+sysApp = ttk.Button(root, text="转为系统应用")
+sysApp.bind("<Button-1>")
+sysApp.grid(row=2, column=0, padx=10, pady=10, sticky="nesw")
+
 
 theme = ["light", "dark"]
 root.tk.call("source", "sv.tcl")
